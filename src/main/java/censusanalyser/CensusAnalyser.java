@@ -35,5 +35,30 @@ public class CensusAnalyser {
             throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.INVALID_FILE_DATA_TYPE);
         }
     }
+
+    public int loadIndiaStateCode(String csvFilePath) throws CensusAnalyserException {
+        if (!csvFilePath.contains(".csv")) {
+            throw new CensusAnalyserException("Invalid file type", CensusAnalyserException.ExceptionType.INVALID_FILE_TYPE);
+        }
+        try {
+            Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
+            CsvToBeanBuilder<IndiaStateCodeCSV> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
+            csvToBeanBuilder.withType(IndiaStateCodeCSV.class);
+            csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
+            CsvToBean<IndiaStateCodeCSV> csvToBean = csvToBeanBuilder.build();
+            Iterator<IndiaStateCodeCSV> censusCSVIterator = csvToBean.iterator();
+            int namOfEateries = 0;
+            Iterable<IndiaStateCodeCSV> indiaCensusCSVIterable = () -> censusCSVIterator;
+            namOfEateries = (int) StreamSupport.stream(indiaCensusCSVIterable.spliterator(), false).count();
+            return namOfEateries;
+        } catch (IOException e) {
+            throw new CensusAnalyserException(e.getMessage(),
+                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+        } catch (RuntimeException e) {
+            if (e.getMessage().contains("header!"))
+                throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.INVALID_FILE_HEADER);
+            throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.INVALID_FILE_DATA_TYPE);
+        }
+    }
 }
 
