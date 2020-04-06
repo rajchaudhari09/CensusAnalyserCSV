@@ -11,6 +11,7 @@ public class CensusAnalyserTest {
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
     private static final String WRONG_CSV_FILE_TYPE = "./src/test/resources/CensusData.txt";
     private static final String WRONG_CSV_FILE_DILEMETER = "./src/test/resources/CesusinvalidDelimeter.csv";
+    private static final String WRONG_CSV_FILE_HEADER = "./src/test/resources/CesusinvalidHeader.csv";
     @Test
     public void givenIndianCensusCSVFileReturnsCorrectRecords() {
         try {
@@ -52,5 +53,18 @@ public class CensusAnalyserTest {
         } catch (CensusAnalyserException e) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.INVALID_FILE_DATA_TYPE,e.type);
         }
+
     }
+    @Test
+    public void givenIndianCensusData_WithWrongFileHeader_ShouldThrowException(){
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(CensusAnalyserException.class);
+            censusAnalyser.loadIndiaCensusData(WRONG_CSV_FILE_HEADER);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals(CensusAnalyserException.ExceptionType.INVALID_FILE_HEADER,e.type);
+        }
+    }
+
 }
