@@ -7,15 +7,13 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.stream.StreamSupport;
 
 public class CensusAnalyser {
     public int loadIndiaCensusData(String csvFilePath) throws CensusAnalyserException {
-        if (!csvFilePath.contains(".csv")){
-            throw new CensusAnalyserException("Invalid file type",CensusAnalyserException.ExceptionType.INVALID_FILE_TYPE);
+        if (!csvFilePath.contains(".csv")) {
+            throw new CensusAnalyserException("Invalid file type", CensusAnalyserException.ExceptionType.INVALID_FILE_TYPE);
         }
         try {
             Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
@@ -23,18 +21,19 @@ public class CensusAnalyser {
             csvToBeanBuilder.withType(IndiaCensusCSV.class);
             csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
             CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
-            Iterator<IndiaCensusCSV> censusCSVIterator = csvToBean.iterator();;
+            Iterator<IndiaCensusCSV> censusCSVIterator = csvToBean.iterator();
             int namOfEateries = 0;
-            Iterable<IndiaCensusCSV>indiaCensusCSVIterable = ()->censusCSVIterator;
-            namOfEateries = (int) StreamSupport.stream(indiaCensusCSVIterable.spliterator(),false).count();
+            Iterable<IndiaCensusCSV> indiaCensusCSVIterable = () -> censusCSVIterator;
+            namOfEateries = (int) StreamSupport.stream(indiaCensusCSVIterable.spliterator(), false).count();
             return namOfEateries;
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             if (e.getMessage().contains("header!"))
                 throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.INVALID_FILE_HEADER);
-            throw new CensusAnalyserException(e.getMessage(),CensusAnalyserException.ExceptionType.INVALID_FILE_DATA_TYPE);
+            throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.INVALID_FILE_DATA_TYPE);
         }
     }
 }
+
