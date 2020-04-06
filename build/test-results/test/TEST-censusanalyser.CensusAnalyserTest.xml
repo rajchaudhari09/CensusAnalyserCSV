@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.CensusAnalyserTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2020-04-06T19:38:05" hostname="rajchaudhari-HP-Notebook" time="0.155">
+<testsuite name="censusanalyser.CensusAnalyserTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2020-04-06T20:32:57" hostname="rajchaudhari-HP-Notebook" time="0.19">
   <properties/>
-  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.09"/>
-  <testcase name="givenIndianCensusData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.004"/>
-  <testcase name="givenIndiaStateCode_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.001"/>
-  <testcase name="givenIndianCensusData_WithWrongFileDelimeter_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.04"/>
-  <testcase name="givenIndianCensusData_WithWrongFileHeader_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.001"/>
-  <testcase name="givenIndianStateCodeCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.013"/>
+  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.1"/>
+  <testcase name="givenIndianCensusData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.005"/>
+  <testcase name="givenIndiaStateCode_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.002"/>
+  <testcase name="givenIndianCensusData_WithWrongFileDelimeter_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.049"/>
+  <testcase name="givenIndianCensusData_WithWrongFileHeader_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.002"/>
+  <testcase name="givenIndianStateCodeCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.025"/>
   <testcase name="givenIndianStateCode_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.001"/>
   <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.0"/>
-  <testcase name="givenIndianStateCode_WithWrongFileDelimeter_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.001"/>
+  <testcase name="givenIndianStateCode_WithWrongFileDelimeter_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.002"/>
   <testcase name="givenIndianStateCode_WithWrongFileHeader_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[censusanalyser.CensusAnalyserException: Error capturing CSV header!
 	at censusanalyser.CsvFileBuilder.getIterator(CsvFileBuilder.java:24)
-	at censusanalyser.CensusAnalyser.loadIndiaStateCode(CensusAnalyser.java:33)
+	at censusanalyser.CensusAnalyser.loadIndiaStateCode(CensusAnalyser.java:28)
 	at censusanalyser.CensusAnalyserTest.givenIndianStateCodeCSVFileReturnsCorrectRecords(CensusAnalyserTest.java:75)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
