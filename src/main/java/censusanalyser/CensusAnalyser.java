@@ -24,10 +24,11 @@ public class CensusAnalyser {
     public CensusAnalyser() {
         this.csvFileList = new ArrayList<IndiaCensusDAO>();
     }
+
     public int loadIndiaCensusData(String csvFilePath) throws CesusAnalyserException {
         if (!csvFilePath.contains(".csv"))
             throw new CesusAnalyserException("Invalid file type", CesusAnalyserException.ExceptionType.INVALID_FILE_TYPE);
-        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
+        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             IscvBuilder CsvBuilder = CSVBuilderFactory.getCSVBuilder();
             Iterator<IndiaCensusCSV> csvIterator = CsvBuilder.getCSVFileIterator(reader, IndiaCensusCSV.class);
             while (csvIterator.hasNext()) {
@@ -37,39 +38,40 @@ public class CensusAnalyser {
         } catch (IOException e) {
             throw new CesusAnalyserException(e.getMessage(),
                     CesusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             if (e.getMessage().contains("header!"))
-            throw new CesusAnalyserException("Invalid file type", CesusAnalyserException.ExceptionType.INVALID_FILE_HEADER);
+                throw new CesusAnalyserException("Invalid file type", CesusAnalyserException.ExceptionType.INVALID_FILE_HEADER);
             throw new CesusAnalyserException("Invalid file type", CesusAnalyserException.ExceptionType.INVALID_FILE_DATA_TYPE);
         } catch (CsvFileBuilderException e) {
-            throw new CesusAnalyserException(e.getMessage(),e.type);
+            throw new CesusAnalyserException(e.getMessage(), e.type);
         }
     }
 
     public int loadIndiaStateCode(String csvFilePath) throws CesusAnalyserException {
         if (!csvFilePath.contains(".csv"))
             throw new CesusAnalyserException("Invalid file type", CesusAnalyserException.ExceptionType.INVALID_FILE_TYPE);
-        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
+        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             IscvBuilder CsvBuilder = CSVBuilderFactory.getCSVBuilder();
             List<IndiaStateCodeCSV> csvFileList = CsvBuilder.getCSVFileList(reader, IndiaStateCodeCSV.class);
             return csvFileList.size();
         } catch (IOException e) {
             throw new CesusAnalyserException(e.getMessage(),
                     CesusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             if (e.getMessage().contains("header!"))
                 throw new CesusAnalyserException("Invalid file type", CesusAnalyserException.ExceptionType.INVALID_FILE_HEADER);
             throw new CesusAnalyserException("Invalid file type", CesusAnalyserException.ExceptionType.INVALID_FILE_DATA_TYPE);
         } catch (CsvFileBuilderException e) {
-            throw new CesusAnalyserException(e.getMessage(),e.type);
+            throw new CesusAnalyserException(e.getMessage(), e.type);
         }
     }
 
-    private <E> int getCount(Iterator<E> csvIterator){
+    private <E> int getCount(Iterator<E> csvIterator) {
         Iterable<E> csvIterable = () -> csvIterator;
-        int numOfEnteries = (int) StreamSupport.stream(csvIterable.spliterator(),false).count();
+        int numOfEnteries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
         return numOfEnteries;
     }
+
     public String getStateWiseSortedCensusData(String csvFilePath) throws CesusAnalyserException {
         loadIndiaCensusData(csvFilePath);
         if (csvFileList == null || csvFileList.size() == 0) {
@@ -91,10 +93,7 @@ public class CensusAnalyser {
                     csvFileList.set(j, census2);
                     csvFileList.set(j + 1, census1);
                 }
-
             }
-
         }
     }
-
 }

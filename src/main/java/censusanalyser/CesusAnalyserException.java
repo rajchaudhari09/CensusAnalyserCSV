@@ -3,7 +3,7 @@ package censusanalyser;
 import com.bl.csvbuilder.CsvFileBuilderException;
 
 public class CesusAnalyserException extends Exception {
-   public enum ExceptionType {
+    public enum ExceptionType {
         CENSUS_FILE_PROBLEM,
         INVALID_FILE_TYPE,
         INVALID_FILE_DATA_TYPE,
@@ -22,7 +22,7 @@ public class CesusAnalyserException extends Exception {
         this.type = type;
     }
 
-   public CesusAnalyserException(String message,CsvFileBuilderException.ExceptionType type) {
+    public CesusAnalyserException(String message, CsvFileBuilderException.ExceptionType type) {
         super(message);
         this.type = ExceptionType.valueOf(type.name());
     }
