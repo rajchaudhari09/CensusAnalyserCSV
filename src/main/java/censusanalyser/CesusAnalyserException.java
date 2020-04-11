@@ -26,4 +26,9 @@ public class CesusAnalyserException extends Exception {
         super(message);
         this.type = ExceptionType.valueOf(type.name());
     }
+
+    public CesusAnalyserException(String message, String name) {
+        super(message);
+        this.type = ExceptionType.valueOf(name);
+    }
 }
