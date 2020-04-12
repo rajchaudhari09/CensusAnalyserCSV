@@ -1,6 +1,6 @@
 package censusanalyser;
 
-public class CensusCSVDao {
+public class CensusCSVDao extends USCensusCSV {
 
         public String state;
         public double totalArea;

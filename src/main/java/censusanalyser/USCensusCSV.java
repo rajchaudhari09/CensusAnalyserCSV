@@ -5,29 +5,29 @@ import com.opencsv.bean.CsvBindByName;
 public class USCensusCSV {
 
     @CsvBindByName(column = "State Id" , required = true)
-    String stateId;
+    public String stateId;
 
     @CsvBindByName(column = "State" , required = true)
-    String stateName;
+    public String stateName;
 
     @CsvBindByName(column = "Population" , required = true)
-    double population;
+    public double population;
 
     @CsvBindByName(column = "Housing units" , required = true)
-    double housingUnits;
+    public double housingUnits;
 
     @CsvBindByName(column = "Total area" , required = true)
-    double totalArea;
+    public double totalArea;
 
     @CsvBindByName(column = "Water area" , required = true)
-    double waterArea;
+    public double waterArea;
 
     @CsvBindByName(column = "Land area" , required = true)
-    double landArea;
+    public double landArea;
 
     @CsvBindByName(column = "Population Density" , required = true)
-    double populationDensity;
+    public double populationDensity;
 
     @CsvBindByName(column = "Housing Density" , required = true)
-    double housingdensity;
+    public double housingdensity;
 }
