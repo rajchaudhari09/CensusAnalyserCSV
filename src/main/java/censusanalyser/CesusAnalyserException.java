@@ -3,6 +3,10 @@ package censusanalyser;
 import com.bl.csvbuilder.CsvFileBuilderException;
 
 public class CesusAnalyserException extends Exception {
+    public CesusAnalyserException(ExceptionType censusFileProblem) {
+
+    }
+
     public enum ExceptionType {
         CENSUS_FILE_PROBLEM,
         INVALID_FILE_TYPE,

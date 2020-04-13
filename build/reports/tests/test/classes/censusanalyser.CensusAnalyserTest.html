@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">1</div>
+<div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.471s</div>
+<div class="counter">0.797s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox failures" id="successRate">
-<div class="percent">92%</div>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,27 +61,96 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Failed tests</a>
+<a href="#tab0">Tests</a>
 </li>
 <li>
-<a href="#tab1">Tests</a>
-</li>
-<li>
-<a href="#tab2">Standard error</a>
+<a href="#tab1">Standard error</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
-<h2>Failed tests</h2>
-<div class="test">
-<a name="givenIndianCensusCSVFileReturnsCorrectRecords"></a>
-<h3 class="failures">givenIndianCensusCSVFileReturnsCorrectRecords</h3>
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">givenIndiaCensusData_WithWrongFile_ShouldThrowException</td>
+<td class="success">0s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenIndiaStateCode_WithWrongFile_ShouldThrowException</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenIndianCensusCSVFileReturnsCorrectRecords</td>
+<td class="success">0.207s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenIndianCensusData_WhenSortedOnStateWrong_ShouldReturnWrongSortedResult</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenIndianCensusData_WhenSortedOnState_ShouldReturnSortedResult</td>
+<td class="success">0.068s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenIndianCensusData_WithWrongFileDelimeter_ShouldThrowException</td>
+<td class="success">0.010s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenIndianCensusData_WithWrongFileHeader_ShouldThrowException</td>
+<td class="success">0.043s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenIndianCensusData_WithWrongFile_ShouldThrowException</td>
+<td class="success">0.015s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenIndianStateCodeCSVFileReturnsCorrectRecords</td>
+<td class="success">0.184s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenIndianStateCode_WithWrongFileDelimeter_ShouldThrowException</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenIndianStateCode_WithWrongFileHeader_ShouldThrowException</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenIndianStateCode_WithWrongFile_ShouldThrowException</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">givenUSCSVFileReturnsCorrectRecords</td>
+<td class="success">0.262s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard error</h2>
 <span class="code">
-<pre>java.lang.AssertionError: expected:&lt;29&gt; but was:&lt;0&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:645)
-	at org.junit.Assert.assertEquals(Assert.java:631)
-	at censusanalyser.CensusAnalyserTest.givenIndianCensusCSVFileReturnsCorrectRecords(CensusAnalyserTest.java:28)
+<pre>censusanalyser.CesusAnalyserException: Invalid file type
+	at censusanalyser.CensusAnalyser.loadCensusData(CensusAnalyser.java:51)
+	at censusanalyser.CensusAnalyser.loadIndiaCensusData(CensusAnalyser.java:24)
+	at censusanalyser.CensusAnalyserTest.givenIndianCensusCSVFileReturnsCorrectRecords(CensusAnalyserTest.java:27)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -129,93 +198,11 @@
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-</pre>
-</span>
-</div>
-</div>
-<div id="tab1" class="tab">
-<h2>Tests</h2>
-<table>
-<thead>
-<tr>
-<th>Test</th>
-<th>Duration</th>
-<th>Result</th>
-</tr>
-</thead>
-<tr>
-<td class="success">givenIndiaCensusData_WithWrongFile_ShouldThrowException</td>
-<td class="success">0s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenIndiaStateCode_WithWrongFile_ShouldThrowException</td>
-<td class="success">0.001s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="failures">givenIndianCensusCSVFileReturnsCorrectRecords</td>
-<td class="failures">0.007s</td>
-<td class="failures">failed</td>
-</tr>
-<tr>
-<td class="success">givenIndianCensusData_WhenSortedOnStateWrong_ShouldReturnWrongSortedResult</td>
-<td class="success">0s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenIndianCensusData_WhenSortedOnState_ShouldReturnSortedResult</td>
-<td class="success">0.009s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenIndianCensusData_WithWrongFileDelimeter_ShouldThrowException</td>
-<td class="success">0.001s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenIndianCensusData_WithWrongFileHeader_ShouldThrowException</td>
-<td class="success">0s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenIndianCensusData_WithWrongFile_ShouldThrowException</td>
-<td class="success">0.005s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenIndianStateCodeCSVFileReturnsCorrectRecords</td>
-<td class="success">0.258s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenIndianStateCode_WithWrongFileDelimeter_ShouldThrowException</td>
-<td class="success">0.014s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenIndianStateCode_WithWrongFileHeader_ShouldThrowException</td>
-<td class="success">0.001s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenIndianStateCode_WithWrongFile_ShouldThrowException</td>
-<td class="success">0s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">givenUSCSVFileReturnsCorrectRecords</td>
-<td class="success">0.175s</td>
-<td class="success">passed</td>
-</tr>
-</table>
-</div>
-<div id="tab2" class="tab">
-<h2>Standard error</h2>
-<span class="code">
-<pre>censusanalyser.CesusAnalyserException: Invalid file data type
-	at censusanalyser.CensusAnalyser.getStateWiseSortedCensusData(CensusAnalyser.java:67)
-	at censusanalyser.CensusAnalyserTest.givenIndianCensusData_WhenSortedOnState_ShouldReturnSortedResult(CensusAnalyserTest.java:99)
+censusanalyser.CesusAnalyserException: Invalid file type
+	at censusanalyser.CensusAnalyser.loadCensusData(CensusAnalyser.java:51)
+	at censusanalyser.CensusAnalyser.loadIndiaCensusData(CensusAnalyser.java:24)
+	at censusanalyser.CensusAnalyser.getStateWiseSortedCensusData(CensusAnalyser.java:82)
+	at censusanalyser.CensusAnalyserTest.givenIndianCensusData_WhenSortedOnState_ShouldReturnSortedResult(CensusAnalyserTest.java:111)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -274,7 +261,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 5.2.1</a> at 12-Apr-2020, 11:16:48 PM</p>
+<a href="http://www.gradle.org">Gradle 5.2.1</a> at 13-Apr-2020, 8:55:08 AM</p>
 </div>
 </div>
 </body>

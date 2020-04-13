@@ -14,30 +14,47 @@ import java.util.stream.StreamSupport;
 public class CensusAnalyser {
     Map<String,CensusCSVDao> censusCSVMap=null;
     public int loasUSCensusData;
+    private Object USCensusCSV;
 
-    public CensusAnalyser() {
+    public CensusAnalyser() throws CesusAnalyserException, CsvFileBuilderException {
         this.censusCSVMap = new HashMap<>();
     }
 
     public int loadIndiaCensusData(String csvFilePath) throws CesusAnalyserException {
-        if (!csvFilePath.contains(".csv"))
-            throw new CesusAnalyserException("Invalid file type", CesusAnalyserException.ExceptionType.INVALID_FILE_TYPE);
-        try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
+     return this.loadCensusData(csvFilePath,IndiaCensusCSV.class);
+    }
+
+    private <E> int loadCensusData(String csvFilePath, Class<E> indiaCensusCSVClass) throws CesusAnalyserException {
+        try (Reader reader= Files.newBufferedReader(Paths.get(csvFilePath))){
             IscvBuilder CsvBuilder = CSVBuilderFactory.getCSVBuilder();
+            Iterator<E> iterator = CsvBuilder.getCSVFileIterator(reader, indiaCensusCSVClass);
+            Iterable<E> iterable = () -> iterator;
+            if(indiaCensusCSVClass.getName().equals("com.bridgelabz.csv.model.IndiaCensusCSV")) {
+                StreamSupport.stream(iterable.spliterator(), false).
+                        map(IndiaCensusCSV.class::cast).
+                        forEach(indianCensus ->
+                                censusCSVMap.put(indianCensus.state, new CensusCSVDao(indianCensus)));
+                return censusCSVMap.size();
+            }
+            StreamSupport.stream(iterable.spliterator(), false).
+                    map(USCensusCSV.class::cast).
+                    forEach(indianCensus ->
+                            censusCSVMap.put(indianCensus.stateName, new CensusCSVDao(indianCensus)));
+            return censusCSVMap.size();
+
         } catch (IOException e) {
             throw new CesusAnalyserException(e.getMessage(),
                     CesusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
-        } catch (RuntimeException e) {
+        }catch (RuntimeException e) {
             if (e.getMessage().contains("header!"))
                 throw new CesusAnalyserException("Invalid file type", CesusAnalyserException.ExceptionType.INVALID_FILE_HEADER);
             throw new CesusAnalyserException("Invalid file type", CesusAnalyserException.ExceptionType.INVALID_FILE_DATA_TYPE);
+        } catch (CsvFileBuilderException e) {
+            throw new CesusAnalyserException(e.getMessage(), e.type.name());
         }
-        return 0;
     }
 
     public int loadIndiaStateCode(String csvFilePath) throws CesusAnalyserException {
-        if (!csvFilePath.contains(".csv"))
-            throw new CesusAnalyserException("Invalid file type", CesusAnalyserException.ExceptionType.INVALID_FILE_TYPE);
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             IscvBuilder CsvBuilder = CSVBuilderFactory.getCSVBuilder();
             List<IndiaStateCodeCSV> csvFileList = CsvBuilder.getCSVFileList(reader, IndiaStateCodeCSV.class);
@@ -86,8 +103,11 @@ public class CensusAnalyser {
             }
         }
     }
-    public <CsvFileBuilderExceptione extends Throwable> int loadUSCensusData(String usCensusCsvFilePath) throws CsvFileBuilderExceptione {
-        try (Reader reader = Files.newBufferedReader(Paths.get(usCensusCsvFilePath))) {
+    public  int loadUSCensusData(String usCensusCsvFilePath) throws CesusAnalyserException {
+        return this.loadCensusData(usCensusCsvFilePath, censusanalyser.USCensusCSV.class);
+    }
+
+        /*try (Reader reader = Files.newBufferedReader(Paths.get(usCensusCsvFilePath))) {
             IscvBuilder csvBuilder = CSVBuilderFactory.getCSVBuilder();
             Iterator<USCensusCSV> iterator = csvBuilder.getCSVFileIterator(reader, USCensusCSV.class);
             Iterable<USCensusCSV> iterable = () -> iterator;
@@ -112,9 +132,5 @@ public class CensusAnalyser {
         }
 
 
-        return 0;
+        return 0;*/
     }
-
-
-
-}
